@@ -173,7 +173,7 @@ export const getRouterData = app => {
     // },
     
     '/index': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/Index/Index')),
+      component: dynamicWrapper(app, ['zxIndex'], () => import('../routes/Index/Index')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

@@ -23,6 +23,6 @@ export async function getUser(){
     });
     console.log(userData);
   }else{
-    window.location.href = config.LocalhostUrl;
+    //window.location.href = config.LocalhostUrl;
   }
 }

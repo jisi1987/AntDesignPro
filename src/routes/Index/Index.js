@@ -32,49 +32,28 @@ import { getTimeDistance } from '../../utils/utils';
 import styles from './Index.less';
 
 
-
-const newsListData = [];
-
-@connect(({ list, loading }) => ({
+@connect(({ zxIndex, loading }) => ({
   zxIndex,
-  loading: loading.models.list,
+  loading: loading.models.zxIndex,
 }))
 
 export default class Index extends Component {
-  state = {
-    salesType: 'all',
-    currentTabKey: '',
-    rangePickerValue: getTimeDistance('year'),
-  };
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'list/fetch',
-    });
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
+      type: 'zxIndex/getList',
+      payload:{
+        channel:0,
+        type:1,
+        pageNo:1,
+        pageSize:9
+      }
     });
   }
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
-    const { chart, loading } = this.props;
-    const {
-      visitData,
-      visitData2,
-      salesData,
-      searchData,
-      offlineData,
-      offlineChartData,
-      salesTypeData,
-      salesTypeDataOnline,
-      salesTypeDataOffline,
-    } = chart;
-
+    
+    const { zxIndex  } = this.props;
    
     return (
       <Fragment>    
@@ -83,7 +62,8 @@ export default class Index extends Component {
                 <div className={styles.salesRank}>
                   <h4 className={styles.rankingTitle}>新闻列表</h4>
                   <ul className={styles.rankingList}>
-                    {newsListData.map((item, i) => (
+                    
+                    {zxIndex.newsListData.map((item, i) => (
                       <li key={item.title}>
                         <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
                         <span>{item.title}</span>

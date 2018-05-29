@@ -6,34 +6,36 @@ export default {
         newsListData:[],
     },
     effects:{
-        *fetch({ payload }, { call, put }){
+        *getList({ payload },{ call, put}){
             const response = yield call(getNewsListData, payload);
             yield put({
-                type: 'queryList',
-                payload:Array.isArray(response)?response : [],
+                type:'queryList',
+                payload: response,
             });
         },
         *appendFetch({ payload }, { call, put }){
             const response = yield call(getNewsListData, payload);
             yield put({
-                type: 'appendList',
-                payload:Array.isArray(response) ? response : [],
+                type:"appendList",
+                payload:Array.isArray(response) ? response:[],
             });
         },
     },
 
     reducers:{
-        queryList(state, action) {
+        queryList(state, { payload }) {
+            let newsListData={newsListData:payload.data}
             return{
                 ...state,
-                list:action.payload,
+                newsListData,
             };
         },
-        appendList(state,action){
+        appendList(state, action){
             return{
                 ...state,
-                list:state.list.concat(action.payload),
-            };
-        },
+                newsListData:state.list.concat(action.payload),
+            }
+        }
+
     },
 };

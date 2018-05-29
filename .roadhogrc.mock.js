@@ -138,6 +138,13 @@ const proxy = {
       path: '/base/category/list',
     });
   },
+  "proxy":{
+    "/*":{
+      "target":'http://wangxj.psds.com.cn:7799',
+      "changeOrigin":true,
+      "pathRewrite":{"^/*":""}
+    }
+  }
 };
 
 export default (noProxy ? {"/*":'http://wangxj.psds.com.cn:7799'} : delay(proxy, 1000));

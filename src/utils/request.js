@@ -51,14 +51,19 @@ export default function request(url, options) {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
         Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
+        "Content-Type": "application/x-www-form-urlencoded",
+        //'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
         ...newOptions.headers,
       };
+      newOptions.mode = "cors";
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
+      newOptions.mode = "cors";
       newOptions.headers = {
         Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
         ...newOptions.headers,
       };
     }
