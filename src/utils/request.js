@@ -21,7 +21,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
+  if (response.status >= 200  && response.status < 300) {
     return response;
   }
   const errortext = codeMessage[response.status] || response.statusText;
@@ -34,6 +34,20 @@ function checkStatus(response) {
   error.response = response;
   throw error;
 }
+
+
+/**
+ * 重组参数，参数转换成parm1=value1&parm2=value2&...
+ * 
+ * @param {object} params json格式参数
+ */
+function newParams(params){
+  var newparms="";
+  for(var key in params){
+    newparms += key+'='+params[key] + '&';
+  }
+  return newparms;
+} 
 
 /**
  * Requests a URL, returning a promise.
@@ -48,19 +62,25 @@ export default function request(url, options) {
   };
   const newOptions = { ...defaultOptions, ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
+    /* if (url.indexOf('getUserByToken') > -1 ) {
+      newOptions.body = "token="+ newOptions.body.token 
+    } */
+    newOptions.body = newParams(newOptions.body);
+    /*cors支持三种content-type：application/x-www-form-urlencoded,multipart/form-data,text/plain,不支持application/json */
+    newOptions.mode = "cors";
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
-        Accept: 'application/json',
-        "Content-Type": "application/x-www-form-urlencoded",
-        //'Content-Type': 'application/json; charset=utf-8',
+        //Accept: 'application/json',
+        "Content-Type": "application/json;chartset=utf-8",
+        "Access-Control-Allow-Headers":'X-Requested-Width',
+        "Access-Control-Allow-Methods":"*",
         'Access-Control-Allow-Origin': '*',
+        'X-Powered-By':'3.2.1',
         ...newOptions.headers,
       };
-      newOptions.mode = "cors";
-      newOptions.body = JSON.stringify(newOptions.body);
+      //newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
-      newOptions.mode = "cors";
       newOptions.headers = {
         Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -70,14 +90,17 @@ export default function request(url, options) {
   }
 
   return fetch(url, newOptions)
-    .then(checkStatus)
     .then(response => {
-      if (newOptions.method === 'DELETE' || response.status === 204) {
+      console.log(url);
+      console.log(response);
+     // if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
-      }
-      return response.json();
+    //  }
+     // return response.json();
     })
     .catch(e => {
+      console.log(url);
+      console.log(e);
       const { dispatch } = store;
       const status = e.name;
       if (status === 401) {
@@ -98,4 +121,6 @@ export default function request(url, options) {
         dispatch(routerRedux.push('/exception/404'));
       }
     });
+
+   
 }
