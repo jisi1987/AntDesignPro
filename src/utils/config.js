@@ -12,6 +12,8 @@ const linkConfig = {
 
 export default {
     ssoLoginLink:linkConfig.ssoLoginLink,
+    CORS:['http://wangxj.psds.com.cn:8000'],
+    baseURL:linkConfig.ywlink,
     Links:{
         exitLink: linkConfig.ywlink + "/sso/ssoExit",
         userLink: linkConfig.ywlink + "/login/getUserByToken",

@@ -7,155 +7,109 @@ const menuData = [
     path: 'index',
   },
   {
-    name: 'dashboard',
-    icon: 'dashboard',
-    path: 'dashboard',
-    children: [
-      {
-        name: '首页',
-        path: 'analysis',
-      },
-      {
-        name: '监控页',
-        path: 'monitor',
-      },
-      {
-        name: '工作台',
-        path: 'workplace',
-        // hideInBreadcrumb: true,
-        // hideInMenu: true,
-      },
-    ],
-  },
-  {
-    name: '表单页',
+    name: '精准营销',
     icon: 'form',
     path: 'form',
     children: [
       {
-        name: '基础表单',
+        name: '精准营销',
         path: 'basic-form',
-      },
-      {
-        name: '分步表单',
-        path: 'step-form',
-      },
-      {
-        name: '高级表单',
-        authority: 'admin',
-        path: 'advanced-form',
       },
     ],
   },
   {
-    name: '列表页',
-    icon: 'table',
+    name: '尽调助手',
+    icon: 'dashboard',
     path: 'list',
     children: [
       {
-        name: '查询表格',
+        name: '企业信用查询',
         path: 'table-list',
       },
       {
-        name: '标准列表',
+        name: '智能财务分析',
         path: 'basic-list',
       },
       {
-        name: '卡片列表',
+        name: '企业信用报告',
         path: 'card-list',
       },
       {
-        name: '搜索列表',
+        name: '行业研究报告',
         path: 'search',
-        children: [
-          {
-            name: '搜索列表（文章）',
-            path: 'articles',
-          },
-          {
-            name: '搜索列表（项目）',
-            path: 'projects',
-          },
-          {
-            name: '搜索列表（应用）',
-            path: 'applications',
-          },
-        ],
+      },
+      {
+        name: '财务指标参照',
+        path: 'search',
       },
     ],
   },
   {
-    name: '详情页',
-    icon: 'profile',
+    name: '风险监控',
+    icon: 'dashboard',
     path: 'profile',
     children: [
       {
-        name: '基础详情页',
+        name: '监控企业名单',
         path: 'basic',
       },
       {
-        name: '高级详情页',
+        name: '核心信息监控',
         path: 'advanced',
-        authority: 'admin',
+      },
+      {
+        name: '风险动态预警',
+        path: 'advanced',
+      },
+      {
+        name: '舆情查询',
+        path: 'advanced',
+      },
+      {
+        name: '舆情简报',
+        path: 'advanced',
       },
     ],
   },
   {
-    name: '结果页',
-    icon: 'check-circle-o',
+    name: '业务管理',
+    icon: 'dashboard',
     path: 'result',
     children: [
       {
-        name: '成功',
+        name: '授信申请处理',
         path: 'success',
       },
       {
-        name: '失败',
+        name: '业务智能提醒',
+        path: 'fail',
+      },
+      {
+        name: '信贷产品发布',
         path: 'fail',
       },
     ],
   },
   {
-    name: '异常页',
-    icon: 'warning',
+    name: '我的文库',
+    icon: 'dashboard',
     path: 'exception',
     children: [
       {
-        name: '403',
+        name: '财务分析报告',
         path: '403',
       },
       {
-        name: '404',
+        name: '企业信用报告',
         path: '404',
       },
       {
-        name: '500',
+        name: '行业研究报告',
         path: '500',
       },
       {
-        name: '触发异常',
+        name: '新闻资讯收藏',
         path: 'trigger',
-        hideInMenu: true,
-      },
-    ],
-  },
-  {
-    name: '账户',
-    icon: 'user',
-    path: 'user',
-    authority: 'guest',
-    children: [
-      {
-        name: '登录',
-        path: 'login',
-      },
-      {
-        name: '注册',
-        path: 'register',
-      },
-      {
-        name: '注册结果',
-        path: 'register-result',
       },
     ],
   },

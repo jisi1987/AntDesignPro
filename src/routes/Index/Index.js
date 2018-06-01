@@ -69,7 +69,7 @@ export default class Index extends Component {
                         <span>{item.title}</span>
                         <span>{numeral(item.total).format('0,0')}</span>
                       </li>
-                    ))}
+                    ))} 
                   </ul>
                 </div>
               </Col>

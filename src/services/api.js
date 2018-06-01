@@ -16,6 +16,7 @@ export async function queryRule(params) {
 
 export async function removeRule(params) {
   return request('/api/rule', {
+    
     method: 'POST',
     body: {
       ...params,

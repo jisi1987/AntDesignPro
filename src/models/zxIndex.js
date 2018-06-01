@@ -7,6 +7,7 @@ export default {
     },
     effects:{
         *getList({ payload },{ call, put}){
+            console.log(payload)
             const response = yield call(getNewsListData, payload);
             yield put({
                 type:'queryList',
@@ -23,19 +24,18 @@ export default {
     },
 
     reducers:{
-        queryList(state, { payload }) {
-            let newsListData={newsListData:payload.data}
+        queryList(state, action) {
             return{
                 ...state,
-                newsListData,
+                newsListData: action.payload.list,
             };
         },
         appendList(state, action){
             return{
                 ...state,
-                newsListData:state.list.concat(action.payload),
+                newsListData:action.payload,
             }
         }
+    }
 
-    },
 };
