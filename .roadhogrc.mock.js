@@ -13,6 +13,7 @@ import { format, delay } from 'roadhog-api-doc';
   /* 'GET /proxy-get/(.*)': 'http://wangxj.psds.com.cn:7788/',
   'POST /proxy-post/(.*)': 'http://wangxj.psds.com.cn:7788/',
   'DELETE /proxy-delete/(.*)': 'http://wangxj.psds.com.cn:7788/', */
+  
 }; 
 
 // 是否禁用代理

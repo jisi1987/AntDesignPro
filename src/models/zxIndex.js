@@ -1,41 +1,88 @@
-import { getNewsListData } from '../services/api';
+import { getNewsListData, getCustomListData,fakeChartData } from '../services/api';
 
 export default {
     namespace: 'zxIndex',
     state:{
         newsListData:[],
+        hotsListData:[],
+        customListData:[],
+        hyfbData:[],
     },
     effects:{
-        *getList({ payload },{ call, put}){
-            console.log(payload)
+        //获取新闻列表、行业动态
+        *getNewsListData({ payload },{ call, put}){
             const response = yield call(getNewsListData, payload);
+            if(payload.type==1){
+                yield put({
+                    type:'queryNewsList',
+                    payload: response,
+                });
+            }else{
+                yield put({
+                    type:'queryHotsList',
+                    payload: response,
+                });
+            }
+            
+        },
+        //获取代办客户
+        *getCustomList({ payload },{ call, put }){
+            const response = yield call(getCustomListData, payload);
             yield put({
-                type:'queryList',
+                type:'queryCustomList',
                 payload: response,
             });
         },
-        *appendFetch({ payload }, { call, put }){
-            const response = yield call(getNewsListData, payload);
+        //获取行业分布
+        /* *getHyfbData({ payload },{ call, put }){
+            const response = yield call(fakeChartData,payload);
             yield put({
-                type:"appendList",
-                payload:Array.isArray(response) ? response:[],
+                type:'queryHyfbData',
+                payload:response,
             });
-        },
+        }, */
     },
 
     reducers:{
-        queryList(state, action) {
+        //获取新闻列表
+        queryNewsList(state, action) {
+            var list=null;
+            if(action.payload.list){
+                list = action.payload.list;
+            }
             return{
                 ...state,
-                newsListData: action.payload.list,
+                newsListData: list,
             };
         },
-        appendList(state, action){
+        //获取行业动态
+        queryHotsList(state, action) {
+            var list=null;
+            if(action.payload.list){
+                list = action.payload.list;
+            }
             return{
                 ...state,
-                newsListData:action.payload,
+                hotsListData: list,
+            };
+        },
+        //获取代办客户
+        queryCustomList(state, action) {
+            var list=null;
+            if(action.payload.list){
+                list = list;
             }
-        }
+            return{
+                ...state,
+                customListData: list,
+            };
+        },
+        /* queryHyfbData(state, action){
+            return{
+                ...state,
+                hyfbData:action.payload,
+            }
+        } */
     }
 
 };

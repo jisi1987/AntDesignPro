@@ -81,8 +81,17 @@ export async function queryNotices() {
 }
 
 /* charge-web api start  wxj 2015-05-29*/
+/**首页 */
+//获取新闻动态
 export async function getNewsListData(params){
   return request(config.Links.newsListLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取代办客户
+export async function getCustomListData(params){
+  return request(config.Links.customListLink,{
     method:"POST",
     body:params,
   })

@@ -123,7 +123,7 @@ export default class Pie extends Component {
       forceFit = true,
       percent = 0,
       color,
-      inner = 0.75,
+      inner = 0.6,
       animate = true,
       colors,
       lineWidth = 1,

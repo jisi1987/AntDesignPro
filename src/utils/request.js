@@ -5,7 +5,10 @@ function checkStatus(response) {
   const { data: result } = response;
   if (response != null) {
       result.success = true;  // get response successfully
-      return result.data;
+      if(result.data)
+        return result.data;
+      else
+        return result;
     }else {
       const error = new Error(result);
       result.success = false;
