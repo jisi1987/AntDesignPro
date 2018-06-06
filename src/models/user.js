@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent, getUser } from '../services/user';
+import { query as queryUsers, queryCurrent, getUser, getMenuData } from '../services/user';
 
 export default {
   namespace: 'user',
@@ -6,7 +6,8 @@ export default {
   state: {
     list: [],
     currentUser: {},
-  },
+    menuData:[],
+    },
 
   effects: {
     *fetch(_, { call, put }) {
@@ -22,6 +23,13 @@ export default {
       yield put({
         type: 'saveCurrentUser',
         payload: response,
+      });
+    },
+    *getMenuData({ payload },{call, put}){
+      const response = yield call(getMenuData, payload);      
+      yield put({
+          type:'queryMenuList',
+          payload: response,
       });
     },
   },
@@ -46,6 +54,37 @@ export default {
           ...state.currentUser,
           notifyCount: action.payload,
         },
+      };
+    },
+    queryMenuList(state, action){
+      var plist=[];
+      if(action.payload.plist){
+        plist = action.payload.plist;
+      }
+      //菜单处理  
+      var menuData = plist.map((item,index) => {
+        var obj = {
+          key:item.permissionId,
+          name:item.permissionName,
+          path:item.permissionUrl
+        }
+        if(item.childrenList && item.childrenList.length > 0){
+          var children = item.childrenList;
+          obj.children = [];
+          children.map((child,i) => {
+            var childObj = {
+              key:child.permissionId,
+              name:child.permissionName,
+              path:child.permissionUrl
+            }
+            obj.children.push(childObj);
+          });
+        }
+        return obj;
+      });
+      return{
+          ...state,
+          menuData:menuData,
       };
     },
   },

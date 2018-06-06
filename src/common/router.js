@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
-import { getMenuData } from './menu';
+// import { getMenuData } from './menu';
 
 let routerDataCache;
 
@@ -72,10 +72,18 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    
     '/index': {
       component: dynamicWrapper(app, ['zxIndex'], () => import('../routes/Index/Index')),
     },
+    /* '/marking/marking': {     //精准营销模块
+      component: dynamicWrapper(app, ['marking'], () => import('../routes/Marking/marking')),
+    },
+    '/business/creditManage': {     //授信申请管理模块
+      component: dynamicWrapper(app, ['creditManage'], () => import('../routes/Business/creditManage')),
+    },
+    '/business/businessRemide': {     //业务智能提醒模块
+      component: dynamicWrapper(app, ['businessRemide'], () => import('../routes/BusinesssinessRemide')),
+    }, */
     /* '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },
@@ -86,9 +94,6 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
         import('../routes/Dashboard/Workplace')
       ),
-      // hideInBreadcrumb: true,
-      // name: '工作台',
-      // authority: 'admin',
     },
     '/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
@@ -159,7 +164,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['error'], () =>
         import('../routes/Exception/triggerException')
       ),
-    }, */
+    },*/
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
@@ -171,14 +176,13 @@ export const getRouterData = app => {
     },
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-    },
+    }, 
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
-    
   };
   // Get name from ./menu.js or just set it in the router data.
-  const menuData = getFlatMenuData(getMenuData());
+  const menuData = getFlatMenuData([]);
 
   // Route configuration data
   // eg. {name,authority ...routerConfig }

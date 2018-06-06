@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, Icon, Menu, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
@@ -14,7 +14,7 @@ import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes, getQueryString } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
+//import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.png';
 import config from '../utils/config';
 
@@ -25,7 +25,7 @@ const { AuthorizedRoute, check } = Authorized;
  * 根据菜单取得重定向地址.
  */
 const redirectData = [];
-const getRedirect = item => {
+/* const getRedirect = item => {
   if (item && item.children) {
     if (item.children[0] && item.children[0].path) {
       redirectData.push({
@@ -37,8 +37,8 @@ const getRedirect = item => {
       });
     }
   }
-};
-getMenuData().forEach(getRedirect);
+}; */
+//getMenuData().forEach(getRedirect);
 
 /**
  * 获取面包屑映射
@@ -94,14 +94,14 @@ class BasicLayout extends React.PureComponent {
     isMobile,
   };
   getChildContext() {
-    const { location, routerData } = this.props;
+    const { location, routerData, menuData } = this.props;
     return {
       location,
-      breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
+      breadcrumbNameMap: getBreadcrumbNameMap(menuData, routerData),
     };
   }
   componentDidMount() {
-    this.enquireHandler = enquireScreen(mobile => {
+    enquireScreen(mobile => {
       this.setState({
         isMobile: mobile,
       });
@@ -109,15 +109,28 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+    this.props.dispatch({
+      type:'user/getMenuData',
+    })
   }
+ /*  handleSecondPermissionList = ({item}) => {
+    if(item.permissionName != "首页"){
+      this.props.dispatch({
+        type:'user/getSecondPermissionListData',
+        payload:{
+          permissionId:item.key
+        }
+      });
+    }    
+  };
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
-  }
+  } */
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
     let title = '业务管理系统';
-    let currRouterData = null;
+    /* let currRouterData = null;
     // match params path
     Object.keys(routerData).forEach(key => {
       if (pathToRegexp(key).test(pathname)) {
@@ -126,6 +139,9 @@ class BasicLayout extends React.PureComponent {
     });
     if (currRouterData && currRouterData.name) {
       title = `${currRouterData.name} - 业务管理系统`;
+    } */
+    if (routerData[pathname] && routerData[pathname].name) {
+      title = `${routerData[pathname].name} - 业务管理系统`;
     }
     return title;
   }
@@ -180,11 +196,25 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
+  getRedirect = item => {
+    const me = this
+    if (item && item.children) {
+      if (item.children[0] && item.children[0].path) {
+        redirectData.push({
+          from: `${item.path}`,
+          to: `${item.children[0].path}`,
+        });
+        item.children.forEach(children => {
+          me.getRedirect(children);
+        });
+      }
+    }
+  };
   handleExit = () => {
     var token = getQueryString("token");
     sessionStorage.setItem("token",null);
     window.location.href = config.Links.exitLink + "?token="+token;
-  }
+  };
   render() {
     const {
       currentUser,
@@ -194,22 +224,24 @@ class BasicLayout extends React.PureComponent {
       routerData,
       match,
       location,
+      menuData,
     } = this.props;
     const bashRedirect = this.getBashRedirect();
+    menuData.forEach(this.getRedirect);
     const layout = (
       <Layout>
-        <SiderMenu
+         <SiderMenu
           logo={logo}
           // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
           // If you do not have the Authorized parameter
           // you will be forced to jump to the 403 interface without permission
           Authorized={Authorized}
-          menuData={getMenuData()}
+          menuData={menuData}
           collapsed={collapsed}
           location={location}
           isMobile={this.state.isMobile}
           onCollapse={this.handleMenuCollapse}
-        />
+        /> 
         <Layout>
           <Header style={{ padding: 0 }}>
             <GlobalHeader
@@ -274,4 +306,5 @@ export default connect(({ user, global, loading }) => ({
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
+  menuData: user.menuData,
 }))(BasicLayout);

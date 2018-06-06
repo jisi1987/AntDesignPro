@@ -82,6 +82,20 @@ export async function queryNotices() {
 
 /* charge-web api start  wxj 2015-05-29*/
 /**首页 */
+//获取一级菜单
+export async function getFirstPermissionData(params){
+  return request(config.Links.firstPermissionListLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取二级菜单
+export async function getSecondPermissionData(params){
+  return request(config.Links.secondPermissionListLink,{
+    method:"POST",
+    body:params,
+  })
+}
 //获取新闻动态
 export async function getNewsListData(params){
   return request(config.Links.newsListLink,{

@@ -1,14 +1,31 @@
 import axios from 'axios';
-import { notification } from 'antd';
+import { notification, Alert } from 'antd';
+import config from './config';
 
 function checkStatus(response) {
   const { data: result } = response;
   if (response != null) {
-      result.success = true;  // get response successfully
-      if(result.data)
-        return result.data;
-      else
-        return result;
+      result.success = true;  // get response successfully      
+      const mdata = result.data;
+      switch(result.code){
+        case "C00000":        
+        if(result.data){
+          return mdata;
+        }else{
+          return result;
+        }
+        break;
+        case "C00001":
+        //window.location.href = config.ssoLoginLink;
+        break;
+        case "W00020":
+        //window.location.href = config.ssoLoginLink;
+        break;
+        default:
+        return mdata;
+        break;
+      }
+        
     }else {
       const error = new Error(result);
       result.success = false;

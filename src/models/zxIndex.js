@@ -70,7 +70,7 @@ export default {
         queryCustomList(state, action) {
             var list=null;
             if(action.payload.list){
-                list = list;
+                list = action.payload.list;
             }
             return{
                 ...state,

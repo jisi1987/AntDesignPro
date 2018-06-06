@@ -21,7 +21,8 @@ export default {
         userLink: linkConfig.ywlink + "/login/getUserByToken",
 
         /** 首页 */
-
+        //获取所有菜单
+        allMenuListLink: linkConfig.ywlink + '/permission/getAllPermissionList',
         //获取一级菜单
         firstPermissionListLink: linkConfig.ywlink + '/permission/getFirstPermissionList',
         //获取二级菜单
