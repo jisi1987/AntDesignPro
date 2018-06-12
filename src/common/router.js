@@ -75,6 +75,22 @@ export const getRouterData = app => {
     '/index': {
       component: dynamicWrapper(app, ['zxIndex'], () => import('../routes/Index/Index')),
     },
+    // '/creditrisk/preloan': {//企业信用查询
+    //   component: dynamicWrapper(app, ['preloan'], () => import('../routes/Creditrisk/Preloan')),
+    // },
+    '/creditrisk/financeinfo': {//智能财务分析
+      component: dynamicWrapper(app, ['creditrisk/financeInfo'], () => import('../routes/Creditrisk/FinanceInfo')),
+    },
+    // '/creditrisk/riskcontrolreport': {//企业信用报告
+    //   component: dynamicWrapper(app, ['creditrisk/riskControlReport'], () => import('../routes/Creditrisk/RiskControlReport')),
+    // },
+    // '/creditrisk/industryreport': {//行业研究报告
+    //   component: dynamicWrapper(app, ['creditrisk/industryReport'], () => import('../routes/Creditrisk/IndustryReport')),
+    // },
+    // '/creditrisk/firmperformance': {//财务指标参照
+    //   component: dynamicWrapper(app, ['creditrisk/firmperFormance'], () => import('../routes/Creditrisk/FirmperFormance')),
+    // },
+
     /* '/marking/marking': {     //精准营销模块
       component: dynamicWrapper(app, ['marking'], () => import('../routes/Marking/marking')),
     },
@@ -84,87 +100,7 @@ export const getRouterData = app => {
     '/business/businessRemide': {     //业务智能提醒模块
       component: dynamicWrapper(app, ['businessRemide'], () => import('../routes/BusinesssinessRemide')),
     }, */
-    /* '/dashboard/analysis': {
-      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
-    },
-    '/dashboard/monitor': {
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
-    },
-    '/dashboard/workplace': {
-      component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
-        import('../routes/Dashboard/Workplace')
-      ),
-    },
-    '/form/basic-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
-    },
-    '/form/step-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm')),
-    },
-    '/form/step-form/info': {
-      name: '分步表单（填写转账信息）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step1')),
-    },
-    '/form/step-form/confirm': {
-      name: '分步表单（确认转账信息）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step2')),
-    },
-    '/form/step-form/result': {
-      name: '分步表单（完成）',
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/StepForm/Step3')),
-    },
-    '/form/advanced-form': {
-      component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
-    },
-    '/list/table-list': {
-      component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
-    },
-    '/list/basic-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
-    },
-    '/list/card-list': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
-    },
-    '/list/search': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/List')),
-    },
-    '/list/search/projects': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Projects')),
-    },
-    '/list/search/applications': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Applications')),
-    },
-    '/list/search/articles': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
-    },
-    '/profile/basic': {
-      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
-    },
-    '/profile/advanced': {
-      component: dynamicWrapper(app, ['profile'], () =>
-        import('../routes/Profile/AdvancedProfile')
-      ),
-    },
-    '/result/success': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),
-    },
-    '/result/fail': {
-      component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
-    },
-    '/exception/403': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
-    },
-    '/exception/404': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
-    },
-    '/exception/500': {
-      component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
-    },
-    '/exception/trigger': {
-      component: dynamicWrapper(app, ['error'], () =>
-        import('../routes/Exception/triggerException')
-      ),
-    },*/
+   
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },

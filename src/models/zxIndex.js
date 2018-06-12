@@ -1,4 +1,19 @@
-import { getNewsListData, getCustomListData,fakeChartData } from '../services/api';
+import { 
+    getFirstLevelSysIndustry,
+    getIndustryByCode,
+    getIndustryByPath,
+    uploadExcelFile,
+    uploadConfig,
+    getSheet,
+    getTitle,
+    seTitleConfig,
+    getContent,
+    updateContent,
+    getFileAndSheet,
+    getSubjectval,
+    updateSubjectval,
+    createReport,
+} from '../services/api';
 
 export default {
     namespace: 'zxIndex',

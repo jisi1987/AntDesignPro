@@ -110,4 +110,105 @@ export async function getCustomListData(params){
     body:params,
   })
 }
+
+/** 财务分析 */
+//获取一级行业类别
+export async function getFirstLevelSysIndustry(params){
+  return request(config.Links.firstLevelSysIndustryLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//根据code获取下一级行业类别
+export async function getIndustryByCode(params){
+  return request(config.Links.sysIndustryByCodeLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//根据key搜索行业类别
+export async function getIndustryByPath(params){
+  return request(config.Links.sysIndustryByPathLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//上传文件
+export async function uploadExcelFile(params){
+  return request(config.Links.uploadExcelFileLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//文件处理
+export async function uploadConfig(params){
+  return request(config.Links.uploadConfigLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取Excel相关数据
+export async function getSheet(params){
+  return request(config.Links.sheetLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取表头
+export async function getTitle(params){
+  return request(config.Links.titleLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//设置titleconfig
+export async function seTitleConfig(params){
+  return request(config.Links.titleConfigLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取报表预览数据、目录
+export async function getContent(params){
+  return request(config.Links.contentLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//修改报表
+export async function updateContent(params){
+  return request(config.Links.updateContentLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取数据校验目录
+export async function getFileAndSheet(params){
+  return request(config.Links.fileandsheetLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//获取数据校验-数据简表
+export async function getSubjectval(params){
+  return request(config.Links.subjectvalLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//修改数据简表
+export async function updateSubjectval(params){
+  return request(config.Links.updateSubjectvalLink,{
+    method:"POST",
+    body:params,
+  })
+}
+//生成报告
+export async function createReport(params){
+  return request(config.Links.reportPdfUrlLink,{
+    method:"POST",
+    body:params,
+  })
+}
+
 /* charge-web api end */

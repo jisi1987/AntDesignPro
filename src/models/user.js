@@ -60,11 +60,14 @@ export default {
       var plist=[];
       if(action.payload.plist){
         plist = action.payload.plist;
+      }else{
+        plist = action.payload;
       }
       //菜单处理  
       var menuData = plist.map((item,index) => {
         var obj = {
           key:item.permissionId,
+          icon: 'qrcode',
           name:item.permissionName,
           path:item.permissionUrl
         }

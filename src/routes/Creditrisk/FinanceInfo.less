@@ -1,0 +1,191 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.stepdiv{
+    margin: 25px 0;
+    padding: 0;
+
+    .stepBtns{
+        margin-top: 25px;
+        text-align: center;
+        Button{
+            margin: 0 20px;
+        }
+    }
+
+    .content p{
+        overflow: hidden;
+        width: 90%;
+        margin: 0 auto;
+        line-height: 30px;
+        padding: 10px 0;
+    }
+    .content p.sheetp{
+        margin-top: 20px;
+    }
+    .content p:first-child{
+        margin-top: 10px;
+    }
+    .content p span { display: inline-block; }
+    .content p.subp{
+        padding: 0;
+        /*margin-top: 0;*/
+    }
+    .content p label{
+        float: left;
+        margin-right: 10px;
+        color: #666;
+        text-align: right;
+        font-size: 14px;
+    }
+    .content p label.lblexcel{
+        width: 145px;
+    }
+    .content p label.lblnrys{
+        width: 120px;
+    }
+    .content p span.fileupload{
+        position: relative;
+        /* float: left; */
+        display: inline-block;
+        width: 67%;
+        height: 31px;
+        border: 1px solid #bcd2eb;
+        border-radius: 4px;
+    }
+    .content p span.fileupload .filename{
+        padding-left: 10px;
+        padding-right: 90px;
+        height: 26px;
+        width: 100%;
+        border: 0;
+        line-height: 26px;
+        font-size: 14px;
+        color: #333;
+        border-radius: 4px;
+    }
+    .content p span.fileupload .btnUpload{
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: inline-block;
+        width: 80px;
+        height: 30px;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        background: #339df0;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+    }
+    .content p select{
+        float: left;
+        width: 130px;
+        height: 30px;
+        padding: 0 10px;
+        line-height: 30px;
+        border:1px solid #bcd2eb;
+        border-radius: 4px;
+    }
+    .content p select option{ line-height: 30px;}
+    .content p select.sltsheet{width: 394px;}
+    .content p select.reporttype{
+        float: right;
+        width: 85px;
+        padding-right: 0px;
+        padding-left: 5px;
+    }
+
+}
+
+/*步骤*/
+.steps{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.step {
+    position: relative;
+    height: 36px;
+    padding-left: 40px;
+    line-height: 36px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    background: #bee0fa;
+    border-right: 4px solid #fff;
+    box-sizing: border-box;
+    background-position: 25px center;
+    cursor: pointer;
+}
+.step:after,.step:before{
+    position: absolute;
+    top: 0;
+    content: "";
+    display: block;
+    border-width: 18px;
+    width: 0;
+    height: 0;
+    border-style: dashed dashed dashed solid;
+}
+.step:before {
+    border-color: transparent transparent transparent #fff;
+    z-index: 1;
+    left: 0;
+}
+.step:after {
+    border-color: transparent transparent transparent #bee0fa;
+    z-index: 2;
+    right: -36px;
+}
+.step1 {
+    background-image: url(../../assets/finance/icon_cwbb_b.png);
+    background-repeat: no-repeat;
+}
+.step2 {
+    background-image: url(../../assets/finance/icon_nrys_b.png);
+    background-repeat: no-repeat;
+}
+.step3 {
+    background-image: url(../../assets/finance/icon_hylb_b.png);
+    background-repeat: no-repeat;
+}
+.step4 {
+    background-image: url(../../assets/finance/icon_zdsb_b.png);
+    background-repeat: no-repeat;
+}
+.step5 {
+    background-image: url(../../assets/finance/icon_sjyl_b.png);
+    background-repeat: no-repeat;
+}
+.step6 {
+    background-image: url(../../assets/finance/icon_scbg_b.png);
+    background-repeat: no-repeat;
+    border-right: 18px solid #fff;
+}
+.step.cur {
+    background-color: #ff8d0a;
+    color: #fff;
+}
+.step1.cur {
+    background-image: url(../../assets/finance/icon_cwbb_w.png);
+}
+.step2.cur {
+    background-image: url(../../assets/finance/icon_nrys_w.png);
+}
+.step3.cur {
+    background-image: url(../../assets/finance/icon_hylb_w.png);
+}
+.step4.cur {
+    background-image: url(../../assets/finance/icon_zdsb_w.png);
+}
+.step5.cur {
+    background-image: url(../../assets/finance/icon_sjyl_w.png);
+}
+.step6.cur {
+    background-image: url(../../assets/finance/icon_scbg_w.png);
+}
+.step.cur:after {
+    border-color: transparent transparent transparent #ff8d0a;
+}

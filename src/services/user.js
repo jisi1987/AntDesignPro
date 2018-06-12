@@ -32,7 +32,7 @@ export async function getUser(){
 }
 
 //获取一级菜单
-export async function getMenuData(){
+/* export async function getMenuData(){
   const token = getQueryString("token");
   if(token && token!="" && token != undefined && token != "undefined"){
     return request(config.Links.allMenuListLink,{
@@ -44,4 +44,9 @@ export async function getMenuData(){
   }else{
    // window.location.href = config.LocalhostUrl;
   }
+} */
+
+//获取moks菜单数据
+export async function getMenuData(){
+  return request('/api/menuData');
 }

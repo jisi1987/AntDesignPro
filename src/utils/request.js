@@ -16,13 +16,13 @@ function checkStatus(response) {
         }
         break;
         case "C00001":
-        //window.location.href = config.ssoLoginLink;
+        window.location.href = config.ssoLoginLink;
         break;
         case "W00020":
-        //window.location.href = config.ssoLoginLink;
+        window.location.href = config.ssoLoginLink;
         break;
         default:
-        return mdata;
+        return result;
         break;
       }
         
@@ -32,6 +32,16 @@ function checkStatus(response) {
       error.result = result;
       throw error;
   }
+}
+/**
+ * 参数格式化
+ * @param {obj} obj 传进来的参数
+ */
+function transformRequest(obj) {
+  var str = [];
+  for(var p in obj)
+    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+  return str.join("&");
 }
 
 /**
@@ -45,17 +55,22 @@ export default function request(url, options) {
   const defaultOptions = {
     credentials: 'include',
   };
-  function transformRequest(obj) {
-    var str = [];
-    for(var p in obj)
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    return str.join("&");
-}
+
+  //是否为财务分析调用接口
+  var isCwfx = false;
+  if(options && options.body && options.body.isCwfx){
+    isCwfx = true;
+  }
+   
   const newOptions = { ...defaultOptions, ...options };
+  
   newOptions.mode="cros"
   if (newOptions.method === 'POST' || newOptions.method === 'PUT' || newOptions.method === 'DELETE') {
     if (!(newOptions.body instanceof FormData)) {
-      newOptions.body=transformRequest(newOptions.body);
+      if(!isCwfx){
+        newOptions.body=transformRequest(newOptions.body);
+      }
+      
       newOptions.data=newOptions.body;
       newOptions.headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,6 +85,17 @@ export default function request(url, options) {
         ...newOptions.headers,
         
       };
+    }
+  }
+
+  
+  //财务分析
+  if(isCwfx){
+    newOptions.processData=false;
+    newOptions.contentType=false;
+    newOptions.headers={
+      ...newOptions.headers,
+      'Content-Type':'multipart/form-data'
     }
   }
 
